@@ -1,0 +1,79 @@
+nav {
+
+    input {
+        width: 12em;
+    }
+
+    a,
+    button {
+        margin-left: 1em;
+    }
+
+}
+
+div.main {
+    display: flex;
+    flex-direction: row;
+
+    >div.sidebar {
+        flex: 1;
+
+        position: fixed;
+        width: 25em;
+        height: 100%;
+        overflow: scroll;
+        text-align: center;
+    }
+
+    >div.posts {
+        flex: 2;
+
+        position: fixed;
+        left: 25em;
+        min-width: 60%;
+        height: 100%;
+        overflow: scroll;
+    }
+}
+
+h2 {
+    margin-bottom: 1em;
+}
+
+textarea {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+img {
+    width: 80%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+div.spacer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 1em;
+    padding: 1em;
+    padding-top: 0;
+    margin-bottom: 0;
+
+    button {
+        margin-left: 1em;
+    }
+}
+
+div.user-error {
+    // width: 100%;
+    // margin-top: 0.25rem;
+    // font-size: 0.875em;
+    color: var(--bs-form-invalid-color);
+    text-align: left;
+    margin-left: 2em;
+}
