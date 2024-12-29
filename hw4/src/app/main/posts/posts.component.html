@@ -1,0 +1,19 @@
+<div class="row standard-border" *ngFor="let post of filteredPosts">
+    <div *ngIf="post.id !== 0" class="col">
+        <img [src]="postImage(post.id)" />
+    </div>
+
+    <div class="col">
+        <div><b>Timestamp: </b><span>{{post.timestamp | date:'medium'}}</span></div>
+        <div><b>Author: </b>{{post.author}}</div><br/>
+
+        <h5>{{post.title}}</h5>
+        <div>{{post.body}}</div>
+
+        <div class="row justify-content-between p-4">
+            <button class="col btn btn-outline-success">Edit</button>
+            <button class="col btn btn-outline-success">Comment</button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<nav class="navbar navbar-light">
+    <a class="navbar-brand" (click)="goToMainPage()">Main Page</a>
+    <a class="navbar-brand" (click)="logout()">Log Out</a>
+</nav>
+
+
+<div class="row profile">
+    <div class="col">
+        <div class="image-input">
+            <div>
+                <img [src]="profile.image" />
+            </div>
+            <button class="btn btn-outline-success" (click)="fileInput.click()">Upload New Photo</button>
+            <input type="file" #fileInput />
+        </div>
+
+        <div class="current-info standard-border-2">
+            <h1>Current Info</h1>
+
+            <p>{{profile.username}}</p>
+            <p>{{profile.email}}</p>
+            <p>{{profile.phone}}</p>
+            <p>{{profile.zipcode}}</p>
+            <p>{{showPassword(profile.password)}}</p>
+        </div>
+    </div>
+
+    <div class="col standard-border-2" [formGroup]="profileForm">
+        <h1>Update Info</h1>
+
+        <input formControlName="username" placeholder="Username" class="form-control"
+            [class.is-invalid]="fieldInvalid('username')" />
+        <div *ngIf="fieldInvalid('username')" class="invalid-input">
+            Username can contain only letters (upper/lower) and numbers and has to start with a letter.
+        </div>
+
+        <input formControlName="email" placeholder="Email address" class="form-control"
+            [class.is-invalid]="fieldInvalid('email')" />
+        <div *ngIf="fieldInvalid('email')" class="invalid-input">
+            Please enter a valid email address (ex. asd@gmail.com).
+        </div>
+
+        <input formControlName="phone" placeholder="Phone number" class="form-control"
+            [class.is-invalid]="fieldInvalid('phone')" />
+        <div *ngIf="fieldInvalid('phone')" class="invalid-input">
+            Phone number has to be in 'ddd-ddd-dddd' format (ex. 123-123-1234).
+        </div>
+
+        <input formControlName="zipcode" placeholder="Zip code" class="form-control"
+            [class.is-invalid]="fieldInvalid('zipcode')" />
+        <div *ngIf="fieldInvalid('zipcode')" class="invalid-input">
+            Zip code has to be in 'ddddd' format (ex. 77030).
+        </div>
+
+        <input type="password" formControlName="password" placeholder="Password" class="form-control"
+            [class.is-invalid]="fieldInvalid('password')" />
+        <div *ngIf="fieldInvalid('password')" class="invalid-input">
+            Password can't be blank;
+        </div>
+
+        <input type="password" formControlName="passwordConfirmation" placeholder="Password confirmation"
+            class="form-control" [class.is-invalid]="passwordConfirmationError" />
+        <div *ngIf="passwordConfirmationError" class="invalid-input">
+            Password confirmation does not match entered password.
+        </div>
+
+        <button class="btn btn-outline-success" (click)="updateProfile()">Update Info</button>
+
+    </div>
+
+    <div style="height: 5em;"></div>
+
+</div>
