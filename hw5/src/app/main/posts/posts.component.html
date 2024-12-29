@@ -1,0 +1,29 @@
+<div class="row standard-border" *ngFor="let post of posts">
+    <div *ngIf="post.id !== 0" class="col">
+        <img [src]="postImage(post.id || 0)" />
+    </div>
+
+    <div class="col">
+        <div><b>Timestamp: </b><span>{{post.timestamp | date:'medium'}}</span></div>
+        <div><b>Author: </b>{{post.author}}</div><br/>
+
+        <h5>{{post.title}}</h5>
+        <div>{{post.body}}</div>
+
+        <div class="row justify-content-between p-4">
+            <button class="col btn btn-outline-success">Edit</button>
+            <button class="col btn btn-outline-success">Comment</button>
+        </div>
+        <div *ngIf="post.id !== 0" class="row justify-content-between p-2">
+            <div style="width: 40%;"></div>
+            <button class="col btn btn-outline-success" (click)="post.commentsShowed=!post.commentsShowed">{{post.commentsShowed ? 'Hide Comments' : 'Show Comments'}}</button>
+        </div>
+    </div>
+
+    <div *ngIf="post.commentsShowed" class="row">
+        <div *ngFor="let comment of comments" class="comment">
+            <div>{{comment.author}}</div>
+            <div>{{comment.text}}</div>
+        </div>
+    </div>
+</div>
