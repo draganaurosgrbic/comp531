@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Registration Form</title>
+
+    <meta charset="UTF-8">
+    <meta name="author" content="Dragana Grbic">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        function validateForm() {
+            const submitTimestamp = document.getElementById('submitTimestamp');
+            submitTimestamp.value = Date.now();
+
+            const birthDate = new Date(Date.parse(document.getElementById('birthDate').value));
+            const now = new Date();
+            let personAge = now.getFullYear() - birthDate.getFullYear();
+            const months = now.getMonth() - birthDate.getMonth();
+
+            if (months < 0 || (months === 0 && now.getDate() < birthDate.getDate())) {
+                --personAge;
+            }
+
+            if (personAge < 0) {
+                alert('Birth date has to be in past!');
+                return false;
+            }
+
+            else if (personAge < 18) {
+                alert('Only individuals that are 18 or over can register!');
+                return false;
+            }
+
+            const passwordInputValue = document.getElementById('passwordInput').value;
+            const passwordConfirmationValue = document.getElementById('passwordConfirmation').value;
+
+            if (passwordInputValue.trim() === '') {
+                alert('Password input should not contain only white spaces!');
+                return false;
+            }
+
+            if (passwordConfirmationValue.trim() === '') {
+                alert('Password confirmation should not contain only white spaces!');
+                return false;
+            }
+
+            if (passwordInputValue !== passwordConfirmationValue) {
+                alert('Password input and password confirmation do not match!');
+                return false;
+            }
+
+            return true;
+        }
+
+        function setFormValidation() {
+            const accountName = document.getElementById('accountName');
+            accountName.addEventListener('input', () => {
+                if (accountName.validity.patternMismatch) {
+                    accountName.setCustomValidity('Account number can contain only letters (upper/lower) and numbers and has to start with a letter.');
+                } else {
+                    accountName.setCustomValidity('');
+                }
+            });
+
+            const phoneNumber = document.getElementById('phoneNumber');
+            phoneNumber.addEventListener('input', () => {
+                if (phoneNumber.validity.patternMismatch) {
+                    phoneNumber.setCustomValidity('Phone number has to be in the following format: ddd-ddd-dddd (ex. 123-123-1234).');
+                } else {
+                    phoneNumber.setCustomValidity('');
+                }
+            });
+
+            const zipCode = document.getElementById('zipCode');
+            zipCode.addEventListener('input', () => {
+                if (zipCode.validity.patternMismatch) {
+                    zipCode.setCustomValidity('Zip code has to be 5 digits number (ex. 77030).');
+                } else {
+                    zipCode.setCustomValidity('');
+                }
+            });
+        }
+    </script>
+
+    <style>
+        div.main {
+            padding: 1em;
+        }
+
+        div.buttons {
+            margin-top: 3em;
+        }
+
+        div.buttons>input {
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+        }
+
+        input:not([type='reset']):not([type='submit']) {
+            width: 30em;
+        }
+    </style>
+
+</head>
+
+<body onload="setFormValidation()">
+
+    <div class="main">
+        <h1>Registration Form</h1>
+
+        <form id="registrationForm" method="get" action="formProcessor.html" onsubmit="return validateForm()">
+            <p>
+            <div>Account name:</div>
+            <input type="text" name="accountName" id="accountName" pattern="[a-zA-Z]+[a-zA-Z0-9]*" required
+                placeholder="Enter account name" />
+            </p>
+            <p>
+            <div>Display name:</div>
+            <input type="text" name="displayName" id="displayName" placeholder="Enter display name" />
+            </p>
+            <p>
+            <div>Email address:</div>
+            <input type="email" name="emailAddress" id="emailAddress" required placeholder="Enter email address" />
+            </p>
+            <p>
+            <div>Phone number:</div>
+            <input type="tel" name="phoneNumber" id="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
+                placeholder="Enter phone number" />
+            </p>
+            <p>
+            <div>Date of birth:</div>
+            <input type="date" name="birthDate" id="birthDate" required placeholder="Enter birth date" />
+            </p>
+            <p>
+            <div>Zip code:</div>
+            <input type="text" name="zipCode" id="zipCode" pattern="\d{5,5}" required placeholder="Enter zip code" />
+            </p>
+            <p>
+            <div>Password:</div>
+            <input type="password" name="passwordInput" id="passwordInput" required placeholder="Enter password" />
+            </p>
+            <p>
+            <div>Password confirmation:</div>
+            <input type="password" name="passwordConfirmation" id="passwordConfirmation" required
+                placeholder="Confirm password" />
+            </p>
+
+            <input type="hidden" name="submitTimestamp" id="submitTimestamp" />
+
+            <div class="buttons">
+                <input type="reset" value="Clear Form" />
+                <input type="submit" value="Submit Form" />
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

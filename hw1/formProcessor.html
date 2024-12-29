@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Form Processor Page</title>
+
+    <meta charset="UTF-8">
+    <meta name="author" content="Dragana Grbic">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        div.main {
+            padding: 1em;
+        }
+
+        td {
+            width: 20em;
+        }
+    </style>
+
+    <script>
+        function camelCaseToWords(text) {
+            const temp = text.replace(/([A-Z])/g, " $1");
+            return temp[0].toUpperCase() + temp.substr(1);
+        }
+
+        function extractQueryParams() {
+            const tableNode = document.getElementById('registrationTable');
+            const queryParams = location.search.substring(1).split('&');
+
+            for (const queryParam of queryParams) {
+                const queryKey = camelCaseToWords(queryParam.split('=')[0]);
+                let queryValue = decodeURIComponent(queryParam.split('=')[1].replace(/\+/g, '%20'));
+
+                if (queryKey === 'Password Input' || queryKey === 'Password Confirmation') {
+                    queryValue = queryValue.replace(/./g, '*');
+                }
+
+                if (queryKey === 'Submit Timestamp') {
+                    const submitTimestamp = new Date(parseInt(queryValue));
+                    queryValue = `${submitTimestamp.toLocaleDateString('en-US')} ${submitTimestamp.toLocaleTimeString('en-US')}`;
+                }
+
+                if (queryKey === 'Birth Date') {
+                    queryValue = `${queryValue.split('-')[1]}/${queryValue.split('-')[2]}/${queryValue.split('-')[0]}`
+                }
+
+                const rowNode = document.createElement('tr');
+                tableNode.append(rowNode);
+
+                const fieldNode = document.createElement('td');
+                rowNode.append(fieldNode);
+                fieldNode.innerHTML = queryKey;
+
+                const valueNode = document.createElement('td');
+                valueNode.innerHTML = queryValue;
+                rowNode.append(valueNode);
+            }
+        }
+    </script>
+</head>
+
+<body onload="extractQueryParams()">
+    <div class="main">
+        <h1>Summary of entered data</h1>
+        <table id="registrationTable" border="1">
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
