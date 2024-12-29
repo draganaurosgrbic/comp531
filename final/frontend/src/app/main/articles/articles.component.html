@@ -1,0 +1,53 @@
+<div class="pagination">
+    <div>
+        <button *ngIf="page>0" class="btn btn-outline-success" (click)="changePage(-1)">PREVIOUS PAGE</button>
+    </div>
+    <div>
+        <button *ngIf="page<pageCount-1" class="btn btn-outline-success" (click)="changePage(1)">NEXT PAGE</button>
+    </div>
+</div>
+
+<div class="row standard-border" *ngFor="let article of filteredArticles">
+    <div *ngIf="article.image" class="col">
+        <img [src]="article.image" />
+    </div>
+
+    <div class="col">
+        <div><b>Date: </b><span>{{article.date | date:'medium'}}</span></div>
+        <div><b>Author: </b>{{article.author}}</div><br />
+
+        <div [attr.contenteditable]="article.author===username" #articleText>{{article.text}}</div>
+
+        <div class="row justify-content-between p-2">
+            <div style="width: 70%;"></div>
+            <button *ngIf="article.author===username" class="col btn btn-outline-success"
+                (click)="updateArticle(article.pid, articleText.textContent || '')">Update</button>
+        </div>
+        <div class="row justify-content-between p-4">
+            <textarea class="col form-control" #createCommentText></textarea>
+        </div>
+        <div class="row justify-content-between p-2">
+            <div style="width: 70%;"></div>
+            <button class="col btn btn-outline-success"
+                (click)="updateArticle(article.pid, createCommentText.value, -1)">Comment</button>
+        </div>
+        <div *ngIf="article.comments.length" class="row justify-content-between p-2">
+            <div style="width: 70%;"></div>
+            <button class="col btn btn-outline-success"
+                (click)="toggleCommentsShowed(article)">{{commentsShowed(article) ? 'Hide Comments' :
+                'Show Comments'}}</button>
+        </div>
+    </div>
+
+    <div *ngIf="commentsShowed(article)" class="row">
+        <div *ngFor="let comment of article.comments" class="comment">
+            <div>{{comment.author}}</div>
+            <div [attr.contenteditable]="comment.author===username" #updateCommentText>{{comment.text}}</div>
+            <div class="row justify-content-between">
+                <div style="width: 70%;"></div>
+                <button *ngIf="comment.author===username" class="col btn btn-outline-success"
+                    (click)="updateArticle(article.pid, updateCommentText.textContent || '', comment.id)">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

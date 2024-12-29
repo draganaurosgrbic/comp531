@@ -1,0 +1,22 @@
+<div [formGroup]="loginForm" class="standard-border-2">
+
+    <h1>Login</h1>
+
+    <input formControlName="username" placeholder="Username" class="form-control"
+        [class.is-invalid]="fieldInvalid('username')" />
+    <div *ngIf="fieldInvalid('username')" class="invalid-input">
+        Username is required and can't be blank.
+    </div>
+
+    <input type="password" formControlName="password" placeholder="Password" class="form-control"
+        [class.is-invalid]="fieldInvalid('password')" />
+    <div *ngIf="fieldInvalid('password')" class="invalid-input">
+        Password is required and can't be blank;
+    </div>
+
+    <div *ngIf="formInvalid" class="invalid-input">
+        Unknown user - wrong username or password.
+    </div>
+
+    <button class="btn btn-outline-success" (click)="login()">Login</button>
+</div>

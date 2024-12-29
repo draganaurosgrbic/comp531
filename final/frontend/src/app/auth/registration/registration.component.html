@@ -1,0 +1,51 @@
+<div [formGroup]="registrationForm" class="standard-border-2">
+    <h1>Registration</h1>
+
+    <input formControlName="username" placeholder="Username" class="form-control"
+        [class.is-invalid]="fieldInvalid('username')" />
+    <div *ngIf="fieldInvalid('username')" class="invalid-input">
+        Username can contain only letters (upper/lower) and numbers and has to start with a letter.
+    </div>
+
+    <input formControlName="email" placeholder="Email address" class="form-control"
+        [class.is-invalid]="fieldInvalid('email')" />
+    <div *ngIf="fieldInvalid('email')" class="invalid-input">
+        Please enter a valid email address (ex. asd@gmail.com).
+    </div>
+
+    <input formControlName="zipcode" placeholder="Zip code" class="form-control"
+        [class.is-invalid]="fieldInvalid('zipcode')" />
+    <div *ngIf="fieldInvalid('zipcode')" class="invalid-input">
+        Zip code has to be in 'ddddd' format (ex. 77030).
+    </div>
+
+    <input formControlName="phone" placeholder="Phone number" class="form-control"
+        [class.is-invalid]="fieldInvalid('phone')" />
+    <div *ngIf="fieldInvalid('phone')" class="invalid-input">
+        Phone number has to be in 'ddd-ddd-dddd' format (ex. 123-123-1234).
+    </div>
+
+    <input type="date" formControlName="dob" placeholder="Birth date" class="form-control"
+        [class.is-invalid]="fieldInvalid('dob')" />
+    <div *ngIf="fieldInvalid('dob')" class="invalid-input">
+        Only individuals that are 18 or over can register.
+    </div>
+
+    <input type="password" formControlName="password" placeholder="Password" class="form-control"
+        [class.is-invalid]="fieldInvalid('password')" />
+    <div *ngIf="fieldInvalid('password')" class="invalid-input">
+        Password is required and can't be blank.
+    </div>
+
+    <input type="password" formControlName="passwordConfirmation" placeholder="Password confirmation"
+        class="form-control" [class.is-invalid]="passwordConfirmationError" />
+    <div *ngIf="passwordConfirmationError" class="invalid-input">
+        Password confirmation does not match entered password.
+    </div>
+
+    <div *ngIf="formInvalid" class="invalid-input">
+        Selected username already exists - please select another one.
+    </div>
+
+    <button class="btn btn-outline-success" (click)="register()">Register</button>
+</div>

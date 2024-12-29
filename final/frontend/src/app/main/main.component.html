@@ -1,0 +1,71 @@
+<nav class="navbar navbar-light">
+    <a class="navbar-brand" (click)="goToProfilePage()">Profile Page</a>
+
+    <div class="row">
+        <input class="col form-control" placeholder="Search" #search />
+        <button class="col btn btn-outline-success" (click)="filterArticles(search.value)">Search</button>
+        <a class="col navbar-brand" (click)="logout()">Log Out</a>
+    </div>
+</nav>
+
+
+<div class="main">
+    <div class="sidebar">
+        <div class="standard-border">
+            <h2>New Article</h2>
+
+            <button class="btn btn-outline-success" (click)="fileInput.click()">Add Image</button>
+            <input type="file" #fileInput accept="image/*" (change)="uploadArticleImage($event)" />
+            <textarea class="form-control" placeholder="Text" rows="4" #articleText></textarea>
+
+            <div class="row justify-content-between px-2">
+                <button class="col-4 btn btn-outline-success" (click)="articleText.value=''">Cancel</button>
+                <button class="col-4 btn btn-outline-success"
+                    (click)="createArticle(articleText.value); articleText.value=''">Create</button>
+            </div>
+        </div>
+
+
+        <div class="standard-border">
+            <h2>My Profile</h2>
+
+            <img *ngIf="profile.avatar" [src]="profile.avatar" />
+            <div><b>Username:</b> {{profile.username}}</div>
+            <div><b>Status:</b> {{profile.headline}}</div>
+
+            <div class="spacer">
+                <input class="form-control" placeholder="Update headline" #headline>
+                <button class="btn btn-outline-success"
+                    (click)="updateHeadline(headline.value); headline.value=''">Update</button>
+            </div>
+        </div>
+
+        <h2>Followed Users</h2>
+
+        <div class="standard-border" *ngFor="let user of followedUsers">
+            <img *ngIf="user.avatar" [src]="user.avatar" />
+            <div><b>Username:</b> {{user.username}}</div>
+            <div><b>Status:</b> {{user.headline}}</div>
+
+            <button class="btn btn-outline-success" (click)="removeFollowedUser(user.username)">Remove User</button>
+        </div>
+
+        <h3>Follow New User</h3>
+
+        <div class="spacer">
+            <input (focus)="userError=''" class="form-control" placeholder="Enter user's username" #newUser />
+            <button class="btn btn-outline-success"
+                (click)="addFollowedUser(newUser.value); newUser.value=''">Follow</button>
+        </div>
+        <div *ngIf="userError" class="user-error">
+            {{userError}}
+        </div>
+
+        <div style="height: 5em;"></div>
+    </div>
+
+    <div class="articles">
+        <app-articles></app-articles>
+        <div style="height: 5em;"></div>
+    </div>
+</div>
