@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Dragana Grbic" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="profile.js"></script>
+</head>
+
+<body id="profileBody" onload="setup()">
+
+    <h1>Profile Page</h1>
+    <a href="./main.html">Main Page</a>
+
+    <p>
+        <span>Display name:</span>
+        <input type="text" id="displayNameInput" />
+        <span id="displayName"></span>
+        <span id="displayNameError" class="inputError"></span>
+    </p>
+
+    <p>
+        <span>Email address:</span>
+        <input type="email" id="emailAddressInput" />
+        <span id="emailAddress"></span>
+        <span id="emailAddressError" class="inputError"></span>
+    </p>
+
+    <p>
+        <span>Phone number:</span>
+        <input type="tel" id="phoneNumberInput" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+        <span id="phoneNumber"></span>
+        <span id="phoneNumberError" class="inputError"></span>
+    </p>
+
+    <p>
+        <span>Zip code:</span>
+        <input type="text" id="zipCodeInput" pattern="\d{5,5}" />
+        <span id="zipCode"></span>
+        <span id="zipCodeError" class="inputError"></span>
+    </p>
+
+    <p>
+        <span>Password:</span>
+        <input type="password" id="passwordInput" />
+        <span id="password"></span>
+        <span id="passwordError" class="inputError"></span>
+    </p>
+
+    <p>
+        <span>Password confirmation:</span>
+        <input type="password" id="passwordConfirmationInput" />
+        <span id="passwordConfirmation"></span>
+        <span id="passwordConfirmationError" class="inputError"></span>
+    </p>
+
+    <div>
+        <button onclick="validateForm()">Submit</button>
+    </div>
+
+    <div id="infoBox">
+        <div id="infoMessage"></div>
+        <div class="spacer-row">
+            <button onclick="submitForm()">Confirm</button>
+            <button onclick="hideInfoBox()">Cancel</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
