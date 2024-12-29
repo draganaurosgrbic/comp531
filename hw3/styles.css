@@ -1,0 +1,78 @@
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+div.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.board {
+    border: 1px solid black;
+}
+
+div.board>div {
+    display: flex;
+    flex-direction: row;
+}
+
+div.board>div>div {
+    border: 1px solid black;
+}
+
+div.next-shape {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1em;
+    background-color: whitesmoke;
+    border: 2px solid brown;
+    color: brown;
+}
+
+div.metrics {
+    padding: 1em;
+    margin: 1em;
+    background-color: lightgray;
+    border: 2px solid gray;
+    color: purple;
+}
+
+div.score {
+    padding: 1em;
+    margin: 1em;
+    background-color: gold;
+    border: 2px solid goldenrod;
+    color: purple;
+}
+
+div.dialog {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+
+    display: 'none';
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: lightsteelblue;
+    border: 4px solid peru;
+    color: peru;
+}
+
+button.dialog-button {
+    width: 5em;
+    height: 2em;
+
+    background-color: whitesmoke;
+    border: 1px solid peru;
+    color: peru;
+}

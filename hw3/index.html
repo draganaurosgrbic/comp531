@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Shapes World</title>
+    <meta name="author" content="Dragana Grbic" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+
+    <script src="state-management.js"></script>
+    <script src="board-management.js"></script>
+    <script src="game-rules.js"></script>
+    <script src="drawing.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <div id="dialog" class="dialog">
+        <h2 id="dialog-text"></h2>
+        <button id="dialog-button" class="dialog-button">Ok</button>
+    </div>
+
+    <div class="main">
+        <div id="board" class="board"></div>
+
+        <div>
+            <div class="next-shape">
+                <h3>Next shape:</h3>
+                <canvas id="next-shape"></canvas>
+            </div>
+
+            <div class="metrics">
+                <h3>Metrics:</h3>
+                <p>
+                    Total number of wins: <b><span id="totalWins"></span></b>
+                </p>
+                <p>
+                    Total number of losses: <b><span id="totalLosses"></span></b>
+                </p>
+                <p>
+                    Total number of golden rows: <b><span id="totalGoldenRows"></span></b>
+                </p>
+                <p>
+                    Total number of golden diagonals: <b><span id="totalGoldenDiagonals"></span></b>
+                </p>
+                <p>
+                    Total number of silver (gray) rows: <b><span id="totalSilverRows"></span></b>
+                </p>
+                <p>
+                    Total number of silver (gray) diagonals: <b><span id="totalSilverDiagonals"></span></b>
+                </p>
+                <p>
+                    Total number of destroyed shapes: <b><span id="totalDestroyedShapes"></span></b>
+                </p>
+            </div>
+
+            <div class="score">
+                <p>
+                    Total score: <b><span id="totalScore"></span></b>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
